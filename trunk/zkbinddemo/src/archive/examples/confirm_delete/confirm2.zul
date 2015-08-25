@@ -1,0 +1,21 @@
+<hbox>
+	<window title="Case 1" border="1" apply="org.zkoss.bind.BindComposer" 
+		viewModel="@id('vm') @init('org.zkoss.mvvm.examples.confirm_delete.ConfirmDelete2')">
+		<vbox>
+			<listbox model="@bind(vm.items)"
+				selectedItem="@bind(vm.selected)" width="200px">
+				<template name="model" >
+					<listitem>
+						<listcell label="@load(each)" />
+					</listitem>
+				</template>
+			</listbox>
+		</vbox>
+		<label value="@load(vm.message)" />
+		<hbox>
+			<button label="delete" disabled="@load(empty vm.selected)" 
+				onClick="@command(vm.needToConfirm?'showConfirm':'delete')" />
+		</hbox>
+	</window>
+
+</hbox>

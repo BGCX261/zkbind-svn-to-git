@@ -1,0 +1,49 @@
+<zk>
+<style>
+.z-listcell.red .z-listcell-cnt, .z-label.red{
+	color:red;
+}
+</style>
+<window id="searchWin" title="Search Storage Item" border="normal" width="600px"
+	apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.zkoss.bind.examples.search.wire.SearchAutowireVM')" >
+	<vbox hflex="true">
+		<hbox>
+			Filter : 
+			<textbox id="filterBox" value="@bind(vm.filter)" instant="true"/> 
+			<button id="searchButton" label="Search" disabled="@bind(empty vm.filter)" onClick="@command('doSearch')"/>
+		</hbox>
+		<listbox model="@load(vm.items)" selectedItem="@bind(vm.selected)" hflex="true" height="300px">
+			<listhead>
+				<listheader label="Name"/>
+				<listheader label="Price" align="center" />
+				<listheader label="Quantity" align="center"  />
+			</listhead>
+			<template name="model" var="item">
+				<listitem onMouseOver="@command('popupMessage', target=self, content=item.description)">
+					<listcell label="@bind(item.name)"/>
+					<listcell label="@bind(item.price)@converter('formatedNumber', format='###,##0.00')"/>
+					<listcell label="@bind(item.quantity)" sclass="@bind(item.quantity lt 3 ?'red':'')"/>
+				</listitem>
+			</template>
+		</listbox>
+		<groupbox id="detailBox" visible="@bind(not empty vm.selected)" hflex="true" mold="3d">
+			<caption label="@bind(vm.selected.name)"/>
+			<grid hflex="true" >
+				<columns>
+					<column width="120px"/>
+					<column/>
+				</columns>
+				<rows>
+					<row>Description <label value="@bind(vm.selected.description)"/></row>
+					<row>Price <label value="@bind(vm.selected.price) @converter('formatedNumber', format='###,##0.00')"/></row>
+					<row>Quantity <label id="quantityLabel" value="@bind(vm.selected.quantity)" sclass="@bind(vm.selected.quantity lt 3 ?'red':'')"/></row>
+					<row>Total Price <label value="@bind(vm.selected.totalPrice) @converter(vm.totalPriceConverter)"/></row>
+				</rows>
+			</grid>
+		</groupbox>
+	</vbox>
+	<popup id="msgPopup">
+		<label id="msg"></label>
+	</popup>
+</window>
+</zk>

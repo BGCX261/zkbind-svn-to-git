@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ZK.forge is distributed under Lesser GPL Version see also http://www.gnu.org/licenses/lgpl.html  -->
+<?page title="Weather Station MVVM Demo"?>
+<!-- 
+This example is inspired by Martin Fowler's Weather Station example at 
+http://martinfowler.com/eaaDev/uiArchs.html
+ -->
+<zk xmlns="http://www.zkoss.org/2005/zul">
+<style>
+.z-intbox-disd { color: black !important; background: #fff !important;}
+.green.z-intbox-disd { color: green !important; background: #fff !important;}
+.red.z-intbox-disd { color: red !important; background: #fff !important;}
+.z-textbox-disd, .z-textbox-disd * { color: black !important; background: #fff !important;}
+</style>
+	<window title="Model-View-Binder (MVB) aka MVVM with Databindings, Statebindings &amp; CommandBindings" 
+		apply="org.zkoss.mvvm.examples.wheather.WeathStationViewModel" width="640px" border="normal">
+		<custom-attributes composerName="testBean"/>
+		<hbox spacing="10px" align="top" >
+			<div width="200px">
+				<listbox id="list" multiple="true" rows="12"
+					model="@load(testBean.stations)" selectedItem="@bind(testBean.station)">
+					<listhead>
+						<listheader label="Station" />
+					</listhead>
+					<template name="model" var="station">
+						<listitem>
+							<listcell label="@load(station.name)" />
+						</listitem>
+					</template>
+				</listbox>
+			</div>
+			<grid hflex="true" vflex="true">
+				<rows>
+					<row>
+						Station
+						<textbox id="nameTextbox" value="@bind(testBean.station.name)" instant="true" disabled="@loads(testBean.stationIsNotNew)" />
+					</row>
+					<row>
+						Date
+						<datebox value="@bind(testBean.station.date)"/>
+					</row>
+					<row>
+						Target
+						<intbox value="@bind(testBean.station.target)" disabled="@bind(testBean.stationIsNotNew)" />
+					</row>
+					<row>
+						Actual
+						<intbox id="actualIntbox" value="@bind(testBean.station.actual)" disabled="@load(testBean.station.confirmed, after='cofirmedCheckboxChecked'}" />
+					</row>
+					<row>
+						Variance
+						<intbox value="@load(testBean.station.variance)" disabled="true" sclass="@load(testBean.lessThan10 ? 'red' : testBean.moreThan5 ? 'green' : '')"/>
+					</row>
+					<row>
+						Confirmed
+						<checkbox id="confirmedCheckbox" checked="@bind(testBean.station.confirmed)" />
+					</row>
+					<row id="buttons">
+						<div>	
+						</div>
+						<div>
+							<button id="create" label="New" onClick="@command('create')"/>
+							<button id="add" label="Add" onClick="@command('add')" disabled="@load(testBean.notValidToAdd)"/>
+						</div>
+					</row>
+				</rows>
+			</grid>
+		</hbox>
+		<label value="This was inspired by Martin Fowler's Weather Station example at http://martinfowler.com/eaaDev/uiArchs.html"/>
+	</window>
+</zk>

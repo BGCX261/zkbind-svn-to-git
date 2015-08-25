@@ -1,0 +1,30 @@
+<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.zkoss.mvvm.examples.duallistbox.DragVM')">
+	
+	<hlayout>
+		<vlayout>
+			List1
+			<listbox model="@bind(vm.list1)" width="300px" height="300px" droppable="true"
+			onDrop="@command('dropToList1',item=event.dragged.value)">
+				<template name="model">
+					<listitem draggable="true" droppable="true"
+					label="@load(each.name)"
+					onDrop="@command('insertToList1',item=event.dragged.value, base=each)"/>
+				</template>
+			</listbox>
+		</vlayout>
+		<vbox vflex="1" pack="middle" width="100px">
+			
+		</vbox>
+		<vlayout>
+			List2
+			<listbox model="@bind(vm.list2)" width="300px" height="300px" droppable="true"
+			onDrop="@command('dropToList2',item=event.dragged.value)">
+				<template name="model">
+					<listitem draggable="true" droppable="true" 
+					label="@load(each.name)"
+					onDrop="@command('insertToList2',item=event.dragged.value, base=each)"/>
+				</template>
+			</listbox>
+		</vlayout>
+	</hlayout>
+</window>

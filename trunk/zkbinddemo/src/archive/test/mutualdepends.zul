@@ -1,0 +1,7 @@
+<window apply="test.MutualDependentViewModel">
+	Mutual Dependency test
+	<custom-attributes composerName="vm"/>
+	<textbox value="@bind(vm.a)"/>
+	<textbox value="@bind(vm.b)"/>
+	<button label="Dump" onClick="binder.getTracker().dump()"/>
+</window>

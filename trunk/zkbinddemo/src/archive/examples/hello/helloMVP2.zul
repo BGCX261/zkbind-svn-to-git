@@ -1,0 +1,10 @@
+<window apply="org.zkoss.mvvm.examples.hello.HelloComposer2">
+	<button id="btn" label="Show"/>
+	
+	<window id="win" title="Hello" closable="true" width="300px" height="200px" visible="false">
+		<hbox align="center" pack="center" hflex="true" vflex="true">
+			<label id="lbl"/>
+		</hbox>
+	</window>
+	
+</window>

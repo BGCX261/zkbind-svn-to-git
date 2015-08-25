@@ -1,0 +1,21 @@
+<window title="@bind(vm.formTitle)" apply="org.zkoss.mvvm.examples.album.AlbumViewModel" width="600px" border="normal">
+	<custom-attributes composerName="vm"/>
+	<hlayout hflex="true" spacing="20px">
+		<listbox width="300px" model="@bind(vm.albumList)" selectedItem="@bind(vm.selectedAlbum)" vflex="true">
+			<template name="model" var="a">
+				<listitem label="@bind(a.title)"/>
+			</template>
+		</listbox>
+		<vlayout hflex="true" spacing="10px">
+			<hlayout>Title: <textbox value="@bind(vm.title)" instant="true" hflex="true"/></hlayout>
+			<hlayout>Artist: <textbox value="@bind(vm.artist)" instant="true" hflex="true"/></hlayout>
+			<hlayout><checkbox checked="@bind(vm.classical)"/> Classical</hlayout>
+			<hlayout>Composer: <textbox value="@bind(vm.composer)" disabled="@bind(not vm.composerFieldEnabled)" instant="true" hflex="true"/></hlayout>
+			<hlayout>
+				<button onClick="@command('apply')" disabled="@bind(not vm.applyEnabled)" label="Apply"/> 
+				<button onClick="@command('cancel')" disabled="@bind(not vm.cancelEnabled)" label="Cancel"/>
+			</hlayout>
+		</vlayout>
+	</hlayout>
+<button label="Dump" onClick="binder.getTracker().dump()"/>
+</window>

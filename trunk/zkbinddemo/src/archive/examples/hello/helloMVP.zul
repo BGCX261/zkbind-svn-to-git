@@ -1,0 +1,4 @@
+<window apply="org.zkoss.mvvm.examples.hello.HelloComposer">
+	<label id="lbl"/>
+	<button id="btn" label="Show"/>
+</window>

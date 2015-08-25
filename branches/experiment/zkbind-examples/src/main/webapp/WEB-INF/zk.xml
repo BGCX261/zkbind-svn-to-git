@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- zk.xml
+	Purpose:
+		
+	Description:
+		
+	History:
+		Sun Mar 26 16:29:07     2006, Created by tomyeh
+
+Copyright (C) 2006 Potix Corporation. All Rights Reserved.
+-->
+
+<zk>
+	<!-- Defines the application's name -->
+	<preference>
+		<name>org.zkoss.zk.ui.WebApp.name</name>
+		<value>zkbind-examples</value>
+	</preference>
+
+	<system-config>
+        <ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory</ui-factory-class>
+    </system-config>
+
+	<library-property>
+		<name>org.zkoss.zul.Button.mold</name>
+		<value>trendy</value>
+	</library-property>
+
+	<!-- [ZK EE]
+		Turn on if you want to enable the render-on-demand feature for grid.
+		It improves the performance for huge grid.
+		Default: false
+	-->
+	<library-property>
+		<name>org.zkoss.zul.grid.rod</name>
+		<value>true</value>
+	</library-property>
+	<!-- [ZK EE]
+		Turn on if you want to enable the render-on-demand feature for listbox.
+		It improves the performance for huge listbox.
+		Default: false
+	-->
+	<library-property>
+		<name>org.zkoss.zul.listbox.rod</name>
+		<value>true</value>
+	</library-property>
+
+</zk>

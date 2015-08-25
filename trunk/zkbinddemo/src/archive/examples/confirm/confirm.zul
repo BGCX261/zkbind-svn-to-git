@@ -1,0 +1,45 @@
+<window apply="org.zkoss.mvvm.examples.confirm.ConfirmViewModel">
+	<custom-attributes composerName="vm" />
+	<vbox>
+		<listbox model="@bind(vm.cityList)"
+			selectedItem="@bind(vm.selected) @validator('dirtyValidator')"
+			width="500px">
+			<listhead>
+				<listheader label="City" />
+				<listheader label="Population" />
+			</listhead>
+			<template name="model" var="city">
+				<listitem>
+					<listcell label="@bind(city.name)" />
+					<listcell label="@bind(city.population)" />
+				</listitem>
+			</template>
+		</listbox>
+		Detail
+		<grid id="grid"
+			form="@id('fx') @init(vm.form) @load(vm.selected) @save(vm.selected, before={'update','confirmUpdate'})
+			@validator('formValidator')" 
+			width="500px">
+			<rows>
+				<row>
+					<cell>City</cell>
+					<cell>
+						<textbox value="@bind(fx.name)" />
+					</cell>
+				</row>
+				<row>
+					<cell>Population</cell>
+					<cell>
+						<intbox value="@bind(fx.population)" />
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+	<hbox>
+		<button label="update" disabled="@load(empty vm.selected)"
+			onClick="@command('update')" />
+	</hbox>
+	<label value="@load(vm.message)" />
+	<include src="dialog.zul"/>
+</window>

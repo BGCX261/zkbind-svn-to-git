@@ -1,0 +1,55 @@
+<zk>
+	<!--
+		A example to demonstrate global command's usage, used in Developer Reference 6.0, including:
+		1. Bind to local command & global command. 
+		1.1 After executing local command, use global command to notify another ViewModel to refresh data
+		1.2 if validation fail, not execute local and global command
+		2. only bind to a global command. to demonstrate one to many communication.
+		
+		Demonstrating guide:
+		1. enter an item name and click add, listarea should disply new item.
+		2. enter an invalid item name and list area should no display entered item (last update time doesn't change)
+	-->
+	<vlayout apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('org.zkoss.mvvm.examples.globalcommand.ControlViewModel')">
+		<menubar width="600px">
+			<menuitem label="Show" onClick="@global-command('show')"></menuitem>
+			<menuitem label="Hide" onClick="@global-command('hide')"></menuitem>
+		</menubar>
+		<hlayout>
+			<vbox id="mainArea" width="200px" height="300px"
+				style="border:dashed 2px" visible="@bind(vm.visible)"
+				apply="org.zkoss.bind.BindComposer"
+				viewModel="@id('vm') @init('org.zkoss.mvvm.examples.globalcommand.MainViewModel')"
+				validationMessages="@id('vmsgs')">
+				<label value="Main Panel" style="font-size:30px" />
+
+				Enter a Item (at least 3 characters):
+				<textbox id="iBox"
+					value="@load(vm.item)@save(vm.item, before='add') @validator(vm.itemValidator)" />
+				<label value="@load(vmsgs[iBox])" style="color:red" />
+				<button label="Add"
+					onClick="@command('add') @global-command('refresh')" />
+				<separator height="20px" />
+				<label value="@load(vm.msg)" />
+			</vbox>
+			<vbox id="listArea" width="400px" height="300px"
+				visible="@bind(vm.visible)" apply="org.zkoss.bind.BindComposer"
+				style="border:solid 2px"
+				viewModel="@id('vm') @init('org.zkoss.mvvm.examples.globalcommand.ListViewModel')">
+				<listbox model="@load(vm.items)">
+				<listhead>
+					<listheader label="Items"/>
+				</listhead>
+				
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each)"/>
+						</listitem>
+					</template>
+				</listbox>
+				<label value="@load(vm.lastUpdate)" />
+			</vbox>
+		</hlayout>
+	</vlayout>
+</zk>

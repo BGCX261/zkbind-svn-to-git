@@ -1,0 +1,21 @@
+<window apply="test.ZKBindSave1Composer">
+	<custom-attributes composerName="vm"/>
+<grid width="500px" >
+	<columns>
+		<column label="First Name"></column>
+		<column label="Last Name"></column>
+		<column label="Full Name"></column>
+		<column label="Full Address"></column>
+	</columns>
+	<rows>
+		<row id="row1">
+			<textbox value="@bind(vm.p1.firstName)"/>
+			<textbox value="@bind(vm.p1.lastName)"/>
+			<label value="@bind(vm.p1.fullName)"/>
+			<label value="@bind(vm.p1.fullAddr)"/>
+		</row>
+	</rows>
+</grid>
+<hlayout>vm.p1.address.zip <textbox value="@bind(vm.p1.address.zip)"/></hlayout>
+<button label="Dump" onClick="binder.getTracker().dump()"/>
+</window>

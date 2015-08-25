@@ -1,0 +1,89 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<zk>
+<style>
+.z-label.red{
+	color:red;
+}
+</style>
+<div>
+<window id="main" title="Order Management" border="normal" width="600px"
+	apply="org.zkoss.zktest.bind.cases.order.OrderBindComposer" >
+	<custom-attributes org.zkoss.zul.listbox.initRodSize="20"/>
+	<vbox hflex="true">
+		<listbox id="orderList" hflex="true" height="200px" model="@{ctrl.orders}" selectedItem="@{ctrl.selected}">
+			<listhead>
+				<listheader label="Id"/>
+				<listheader label="Quantity" align="center" width="80px" />
+				<listheader label="Price" align="center" width="80px" />				
+				<listheader label="Creation Date" align="center" width="100px" />
+				<listheader label="Shipping Date" align="center" width="100px" />
+			</listhead>
+			<listitem self="@{each='person'}">
+				<listcell label="@{person.id}"/>				
+				<listcell label="@{person.quantity}"/>
+				<listcell label="@{person.price}"/>
+				<listcell label="@{person.creationDate}"/>
+				<listcell label="@{person.shippingDate}"/>
+			</listitem>
+		</listbox>
+		<toolbar>
+			<button id="newBtn" label="New" />
+			<button id="saveBtn" label="Save" />
+			<!-- show confirm dialog when selected is persisted -->
+			<button id="deleteBtn1" label="Delete"/>
+		</toolbar>
+		<groupbox id="editor" hflex="true" mold="3d" visible="false">
+			<grid hflex="true" >
+				<columns>
+					<column width="120px"/>
+					<column/>
+				</columns>
+				<rows>
+					<row>Id <label id="id" value="@{ctrl.selected.id}"/></row>
+					<row>Description <textbox id="desc" value="@{ctrl.selected.description}"/></row>
+					<row>Quantity
+						<hlayout> 
+							<intbox id="quantity" value="@{ctrl.selected.quantity}" />
+							<label sclass="red" />
+						</hlayout>	
+					</row>					
+					<row>Price 
+						<hlayout>
+							<doublebox id="price" format="###,##0.00" value="@{ctrl.selected.price}"/>
+							<label sclass="red" />
+						</hlayout>
+					</row>
+					<row>Total Price <label id="totalPrice" value="@{ctrl.selected.totalPrice}" /></row>
+					<row>Creation Date 
+						<hlayout> 
+							<datebox id="creationDate" format="yyyy/MM/dd" value="@{ctrl.selected.creationDate}"/>
+							<label sclass="red" />
+						</hlayout>	
+					</row>
+					<row>Shipping Date 
+						<hlayout> 
+							<datebox id="shippingDate" format="yyyy/MM/dd" value="@{ctrl.selected.shippingDate}"/>
+							<label sclass="red" />
+						</hlayout>
+					</row>	
+				</rows>
+			</grid>
+		</groupbox>
+	</vbox>
+	<window id="dialog" title="Confirm" mode="modal" border="normal" width="300px" visible="false">
+		<vbox hflex="true">
+			<hlayout height="50px">
+				<image src="~./zul/img/msgbox/question-btn.png"/>
+				<label />
+			</hlayout>
+			<hbox pack="center" hflex="true">
+				<button id="deleteBtn2" label="Delete"/>
+				<button id="cancelBtn" label="Cancel"/>
+			</hbox>
+		</vbox>
+	</window>
+</window>
+</div>
+<button id="detachAll" label="detach1" onClick="main.detach()"/>
+<button id="detachAll2" label="detach2" onClick="main.parent.detach()"/>
+</zk>

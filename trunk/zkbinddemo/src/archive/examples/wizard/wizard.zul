@@ -1,0 +1,17 @@
+<window apply="org.zkoss.mvvm.examples.wizard.WizardViewModel" width="200px">
+	<custom-attributes composerName="vm"/>
+	<vbox align="center" hflex="true">
+		<include src="@bind(self.attributes[vm.step])" hflex="true">
+			<custom-attributes 
+				step0="step0.zul" 
+				step1="step1.zul" 
+				step2="step2.zul" 
+				step3="step3.zul"/>
+		</include>
+		<label value="@bind(vm.finishMessage)"/>
+		<hbox pack="center" hflex="true" spacing="5px">
+			<button label="Previous" onClick="@command('prev')" disabled="@load(vm.step eq 'step0')" width="90px"/>
+			<button label="@load(vm.lastStep ? 'Finish' : 'Next')" onClick="@command(vm.lastStep ? 'finish' : 'next')" width="90px"/>
+		</hbox>
+	</vbox>
+</window>

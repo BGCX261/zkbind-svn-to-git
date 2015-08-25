@@ -1,0 +1,34 @@
+<window apply="test.ZKBindLoad1Composer">
+	<custom-attributes composerName="vm"/>
+<listbox width="500px" model="@bind(vm.persons)" selectedItem="@bind(vm.selected)">
+	<listhead>
+		<listheader label="First Name"></listheader>
+		<listheader label="Last Name"></listheader>
+		<listheader label="Full Name"></listheader>
+	</listhead>
+	<template name="model" var="p">
+		<listitem>
+			<listcell><textbox value="@bind(p.firstName)"/></listcell>
+			<listcell><textbox value="@bind(p.lastName)"/></listcell>
+			<listcell><label value="@bind(p.fullName)"/></listcell>
+		</listitem>
+	</template>
+</listbox>
+<separator bar="true"></separator>
+<grid width="500px" form="@id('fx') @load(vm.selected) @save(vm.selected, before='myCommand')">
+	<columns>
+		<column label="First Name"></column>
+		<column label="Last Name"></column>
+		<column label="Full Name"></column>
+	</columns>
+	<rows>
+		<row>
+			<textbox value="@bind(fx.firstName)"/>
+			<textbox value="@bind(fx.lastName)"/>
+			<label value="@bind(vm.selected.fullName)"/>
+		</row>
+	</rows>
+</grid>
+<button label="Save" onClick="@command('myCommand')"/>
+<button label="Dump" onClick="binder.getTracker().dump()"/>
+</window>

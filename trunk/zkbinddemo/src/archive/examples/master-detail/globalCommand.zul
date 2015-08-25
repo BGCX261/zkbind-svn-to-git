@@ -1,0 +1,49 @@
+<zk>
+	<!--
+		A example to demonstrate global command's usage, used in Developer Reference 6.0, including:
+		1. local command & global command. 
+		After executing local command, use global command to transfer bound ViewModel's data to update another ViewModel
+		2. global command
+		To demonstrate one to many communication.
+		
+		It basically bases on a UI pattern : Master-detail. 
+	-->
+	<vlayout apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('org.zkoss.mvvm.examples.globalcommand.ControlViewModel')" >
+		<menubar width="600px">
+			<menuitem label="Show" onClick="@global-command('show')"></menuitem>
+			<menuitem label="Hide" onClick="@global-command('hide')"></menuitem>
+		</menubar>
+		<hlayout>
+			<vbox id="mainBox" width="200px" height="300px" style="border:dashed 2px"
+				visible="@bind(vm.visible)" apply="org.zkoss.bind.BindComposer"
+				viewModel="@id('vm') @init('org.zkoss.mvvm.examples.globalcommand.MasterViewModel')" 
+				validationMessages="@id('vmsgs')">
+				<label value="Main Panel" style="font-size:30px" />
+				<!-- 
+				<combobox model="@load(vm.staffs)" onSelect="@command('select') @global-command('detail', name=vm.selected)"
+					selectedItem="@bind(vm.selected)">
+					<template name="model">
+						<comboitem label="@load(each)"
+							value="@load(each)">
+						</comboitem>
+					</template>
+				</combobox>
+				 -->
+				Enter Staff Number (1~5):
+				<intbox id="nBox" value="@load(vm.number)@save(vm.number, before='submit') @validator(vm.staffNumberValidator)"/>
+				<label value="@load(vmsgs[nBox])" style="color:red"/>
+				<button label="Submit"
+					onClick="@command('submit') @global-command('detail', name=vm.selected)" />
+				<separator height="20px" />
+				<label value="@load(vm.msg)" />
+			</vbox>
+			<vbox id="detailBox" width="400px" height="300px"
+				visible="@bind(vm.visible)" apply="org.zkoss.bind.BindComposer"
+				style="border:solid 2px"
+				viewModel="@id('vm') @init('org.zkoss.mvvm.examples.globalcommand.DetailViewModel')" >
+				<label value="@load(vm.msg)" style="font-size:30px" />
+			</vbox>
+		</hlayout>
+	</vlayout>
+</zk>

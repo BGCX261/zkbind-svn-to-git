@@ -1,0 +1,12 @@
+<window apply="test.AbcViewModel">
+	<custom-attributes composerName="vm"/>
+	<vlayout>
+		<textbox value="@bind(vm.a)"/>
+		<label value="@bind(vm.a)"/>
+		<!-- 
+		<textbox value="@bind(vm.b)"/>
+		<textbox value="@bind(vm.c)"/>
+		 -->
+		<button label="Dump" onClick="binder.getTracker().dump()"/>
+	</vlayout>
+</window>

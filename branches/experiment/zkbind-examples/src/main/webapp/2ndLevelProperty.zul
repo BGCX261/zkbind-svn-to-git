@@ -1,0 +1,23 @@
+<zk>
+<window title="Search Storage Item" border="normal" width="600px"
+	apply="org.zkoss.bind.BindComposer" 
+	viewModel="@id('vm') @init('org.zkoss.bind.examples.Notify2LevelPropertyVM')" >
+	<vlayout>
+		<grid hflex="true">
+			<columns>
+				<column width="120px" />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					Description
+					<label value="@load(vm.item.description)" />
+				</row>
+			</rows>
+		</grid>
+		<button label="Notify 1st Level: item" onClick="@command('notify1stLevel')"/>
+		<button label="Notify 2nd Level: item.description" onClick="@command('notify2ndLevel')"/>
+		<button label="Notify 2nd Level By API: item.description" onClick="@command('notifyByApi')"/>
+	</vlayout>
+</window>
+</zk>

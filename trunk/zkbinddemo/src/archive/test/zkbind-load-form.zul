@@ -1,0 +1,20 @@
+<window apply="test.ZKBindLoad1Composer">
+	<custom-attributes composerName="vm"/>
+<grid width="1000px" form="@id('fx') @load(vm.p1)">
+	<columns>
+		<column label="First Name"></column>
+		<column label="Last Name"></column>
+		<column label="Full Name"></column>
+		<column label="Address.street"></column>
+	</columns>
+	<rows>
+		<row id="row1">
+			<label value="@bind(fx.firstName)"/>
+			<label value="@bind(fx.lastName)"/>
+			<label value="@bind(fx.fullName)"/>
+			<label value="@bind(fx.address.street)"/>
+		</row>
+	</rows>
+</grid>
+<button label="Dump" onClick="binder.getTracker().dump()"/>
+</window>

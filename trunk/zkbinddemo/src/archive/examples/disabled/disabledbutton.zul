@@ -1,0 +1,10 @@
+<window apply="org.zkoss.mvvm.examples.disabled.DisabledButtonViewModel">
+	<custom-attributes composerName="vm"/>
+	<hlayout>
+		<vlayout>
+			<hlayout>Enter Symbol: <textbox value="@save(vm.symbol)" instant="true" width="100px"/></hlayout>
+			<hlayout>You last subscribed to: <label value="@load(vm.lastSymbol)"/></hlayout>
+		</vlayout>
+		<button label="Subscribe" disabled="@load(empty vm.symbol)" onClick="@command('subscribe')" vflex="true"/>
+	</hlayout>
+</window>

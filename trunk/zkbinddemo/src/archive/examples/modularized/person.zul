@@ -1,0 +1,8 @@
+<vlayout>
+	<hlayout>
+		First Name: <textbox value="@bind(p.firstName)"/>
+	</hlayout>
+	<hlayout>
+		Last Name: <textbox value="@bind(p.lastName)"/>
+	</hlayout>
+</vlayout>

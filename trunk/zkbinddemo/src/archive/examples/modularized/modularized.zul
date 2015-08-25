@@ -1,0 +1,37 @@
+<window apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('org.zkoss.mvvm.examples.modularized.ModularizedVM')">
+	<vlayout>
+		<hlayout>
+			First Name:
+			<label value="@bind(vm.person1.firstName)" />
+		</hlayout>
+		<hlayout>
+			Last Name:
+			<label value="@bind(vm.person1.lastName)" />
+		</hlayout>
+	</vlayout>
+	<vlayout>
+		<hlayout>
+			First Name:
+			<label value="@bind(vm.person2.firstName)" />
+		</hlayout>
+		<hlayout>
+			Last Name:
+			<label value="@bind(vm.person2.lastName)" />
+		</hlayout>
+	</vlayout>
+	
+	
+	<vlayout p="@ref(vm.person1)">
+		<hlayout>
+			First Name:
+			<textbox value="@bind(p.firstName)" />
+		</hlayout>
+		<hlayout>
+			Last Name:
+			<textbox value="@bind(p.lastName)" />
+		</hlayout>
+	</vlayout>
+	
+	<include p="@ref(vm.person2)" src="person.zul"/>
+</window>

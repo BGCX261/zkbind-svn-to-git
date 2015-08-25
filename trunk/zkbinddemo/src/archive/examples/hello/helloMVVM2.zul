@@ -1,0 +1,12 @@
+<window apply="org.zkoss.mvvm.examples.hello.HelloViewModel2">
+	<custom-attributes composerName="vm"/>
+	<button label="Show" onClick="@command('showHello')"/>
+	
+	<window title="Hello" closable="true" width="300px" height="200px"
+		mode="@load(empty vm.message ? 'embedded' : 'modal')" 		
+		visible="@load(not empty vm.message)" onClose="@command('hideHello')">
+		<hbox align="center" pack="center" hflex="true" vflex="true">
+			<label value="@load(vm.message)"/>
+		</hbox>
+	</window>
+</window>

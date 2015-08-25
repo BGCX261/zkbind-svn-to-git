@@ -1,0 +1,5 @@
+<window apply="org.zkoss.mvvm.examples.hello.HelloViewModel">
+	<custom-attributes composerName="vm"/>
+	<label value="@load(vm.message)"/>
+	<button label="Show" onClick="@command('showHello')"/>
+</window>

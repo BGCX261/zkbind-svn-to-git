@@ -1,0 +1,10 @@
+<groupbox apply="org.zkoss.mvvm.examples.region.TreeModelViewModel">
+	<custom-attributes composerName="vm"/>
+	<caption label="Region"/>
+	<tree model="@load(vm.treeModel)" selectedItem="@bind(vm.selected)">
+		<template name="model" var="p">
+			<treeitem label="@load(p.data.name)"/>
+		</template>
+	</tree>
+	<label value="@load(vm.selected.data.name)"/>
+</groupbox>

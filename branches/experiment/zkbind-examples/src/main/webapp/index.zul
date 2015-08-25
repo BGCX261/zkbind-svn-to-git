@@ -1,0 +1,56 @@
+<zk xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<n:h3>Design your first MVVM page</n:h3>
+	<n:ul>
+		<n:li>
+			<n:a href="search/search.zul">
+				A search filter example v1
+			</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="search/search2.zul">
+				A search filter example v2
+			</n:a>
+		</n:li>
+
+		<n:li>
+			<n:a href="searchex/searchMvc.zul">
+				A search filter example v2 in MVC (composer)
+			</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="searchex/searchMvvmAutowire.zul">
+				A search filter example v2 with @Wire
+			</n:a>
+		</n:li>
+	</n:ul>
+	<n:h3>Design CRUD page by MVVM pattern</n:h3>
+	<n:ul>
+		<n:li>
+			<n:a href="order/order.zul">
+				A order CRUD example v1
+			</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="order/order2.zul">
+				A order CRUD example v2
+			</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="order/order3.zul">
+				A order CRUD example v3
+			</n:a>
+		</n:li>
+		<n:li>
+			<n:a href="zk/order">
+				A order Richlet example as same sa CRUD example v3
+			</n:a>
+		</n:li>
+		<!-- 
+		<n:li>
+			<n:a href="order/orderForm.zul">
+				A order CRUD example v3 using Form Binding
+			</n:a>
+		</n:li>
+		 -->
+	</n:ul>
+</zk>

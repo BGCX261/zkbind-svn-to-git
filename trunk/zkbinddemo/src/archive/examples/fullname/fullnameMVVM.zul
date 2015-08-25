@@ -1,0 +1,8 @@
+<grid width="200px" apply="org.zkoss.mvvm.examples.fullname.FullnameViewModel">
+	<custom-attributes composerName="vm"/>
+	<rows>
+		<row>First Name <textbox value="@bind(vm.firstname)"/></row>
+		<row>Last Name <textbox value="@bind(vm.lastname)"/></row>
+		<row>Full Name <label value="@load(vm.fullname)"/></row>
+	</rows>
+</grid>

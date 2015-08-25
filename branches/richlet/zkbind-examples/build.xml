@@ -1,0 +1,78 @@
+<project name="zkbind-examples" basedir="." default="build">
+
+	<description>
+	</description>
+
+	<!-- ================== -->
+	<!-- === PROPERTIES === -->
+	<!-- ================== -->
+	<property name="warname" value="zkbind-examples.war" />
+	<property name="dist_folder" value="${basedir}/dist" />
+	<property name="antbuild_folder" value="${basedir}/antbuild" />
+	<property name="classes_folder" value="${antbuild_folder}/classes" />
+	<property name="war_folder" value="${antbuild_folder}/war" />
+
+	<property name="src_folder" value="${basedir}/src/main/java" />
+	<property name="content_folder" value="${basedir}/src/main/webapp" />
+
+
+	<path id="classpath">
+		<fileset dir="${basedir}/lib" includes="*.jar" />
+	</path>
+	<target name="build.time" unless="build.time">
+		<tstamp>
+			<format property="build.time" pattern="yyyyMMdd" />
+		</tstamp>
+	</target>
+	<target name="clean" description="removes all generated files">
+		<delete dir="${classes_folder}" />
+		<delete dir="${war_folder}" />
+		<delete dir="${antbuild_folder}" />
+	</target>
+
+	<target name="setup">
+		<mkdir dir="${antbuild_folder}" />
+		<mkdir dir="${classes_folder}" />
+		<mkdir dir="${war_folder}" />
+	</target>
+
+	<target name="compile" depends="setup">
+		<javac encoding="utf8" destdir="${antbuild_folder}/classes" debug="true" source="1.5" target="1.5" includeantruntime="false">
+			<src path="${src_folder}" />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+	<target name="build" depends="build.time,compile">
+		<copy todir="${war_folder}">
+			<fileset dir="${content_folder}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy todir="${war_folder}/WEB-INF/classes">
+			<fileset dir="${classes_folder}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy todir="${war_folder}/WEB-INF/src">
+			<fileset dir="${src_folder}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy todir="${war_folder}/WEB-INF/lib">
+			<fileset dir="${basedir}/lib">
+				<include name="*.*" />
+			</fileset>
+		</copy>
+		<war destfile="${warname}">
+			<fileset dir="${war_folder}">
+				<include name="**/*.*" />
+			</fileset>
+		</war>
+		<zip destfile="zkbind-examples-${build.time}.zip">
+			<fileset dir="${basedir}">
+				<include name="${warname}" />
+			</fileset>
+		</zip>
+	</target>
+</project>

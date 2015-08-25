@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="usage" name="zkbindtest">
+	<property environment="env" />
+	<property name="ECLIPSE_HOME" value="../../../../java/eclipse-jee-3.6-zk" />
+	<tstamp>
+		<format property="build.time" pattern="yyMMddHHmmss" />
+	</tstamp>
+	<property name="junit.output.dir" value="junit/snapshoot-${build.time}" />
+
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.5" />
+	<property name="source" value="1.5" />
+	<path id="zkbindtest.classpath">
+		<pathelement location="target/classes" />
+		<fileset dir="libs">
+			<filename name="*.jar" />
+		</fileset>
+	</path>
+	<target name="usage">
+		<echo>Use following target to test and generate report</echo>
+		<echo>  ant clean build</echo>
+		<echo>  ant pack</echo>
+		<echo>  ant reportAll</echo>
+		<echo>  ant reportAllBasic</echo>
+		<echo>  ant reportAllCollection</echo>
+		<echo>  ant reportAllFeature</echo>
+		<echo>  ant reportAllBug</echo>
+	</target>
+	<target name="init">
+		<mkdir dir="target/classes" />
+		<copy includeemptydirs="false" todir="target/classes">
+			<fileset dir="src">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="target/classes" />
+	</target>
+	<target depends="build-subprojects,build-project" name="build" />
+	<target name="build-subprojects" />
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="target/classes" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="zkbindtest.classpath" />
+		</javac>
+	</target>
+
+
+	<target name="pack" depends="clean, build">
+		<zip destfile="./zkbindtest.zip">
+			<fileset dir=".">
+				<include name="target/**" />
+				<include name="libs/**" />
+				<include name="build.xml" />
+				<include name="junit" />
+			</fileset>
+
+		</zip>
+	</target>
+
+
+
+
+	<target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects" />
+	<target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+		<copy todir="${ant.library.dir}">
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</copy>
+		<unzip dest="${ant.library.dir}">
+			<patternset includes="jdtCompilerAdapter.jar" />
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</unzip>
+	</target>
+	<target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+		<antcall target="build" />
+	</target>
+
+	<target name="LoadTestCase">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.LoadTestCase" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="CollectionTestCase">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.CollectionTestCase" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="ParamTestCase">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.ParamTestCase" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="BugsTestCase0500">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.BugsTestCase0500" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="BugsTestCase1000">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.BugsTestCase1000" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="MemoryTest">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.MemoryTest" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="FeaturesTestCase0001">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.FeaturesTestCase0001" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="FeaturesTestCase0500">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.FeaturesTestCase0500" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="FeaturesTestCase1000">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.FeaturesTestCase1000" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="MiscTestCase">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.MiscTestCase" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="LoadSaveTestCase">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.LoadSaveTestCase" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="ComponentTestCase">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.ComponentTestCase" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="ChildrenTestCase">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.ChildrenTestCase" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="BugsTestCase0001">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.BugsTestCase0001" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="FormTestCase">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<test name="org.zkoss.bind.unitest2.FormTestCase" todir="${junit.output.dir}" />
+			<classpath refid="zkbindtest.classpath" />
+		</junit>
+	</target>
+	<target name="junitreport">
+		<junitreport todir="${junit.output.dir}">
+			<fileset dir="${junit.output.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${junit.output.dir}" />
+		</junitreport>
+	</target>
+
+	<target name="runAll" depends="runAllBasic, runAllCollection, runAllFeature, runAllBug" />
+	<target name="reportAll" depends="runAll, junitreport" />
+
+	<target name="runAllBasic">
+		<antcall target="LoadTestCase" />
+		<antcall target="FormTestCase" />
+		<antcall target="LoadSaveTestCase" />
+		<antcall target="ParamTestCase" />
+		<antcall target="MiscTestCase" />
+		<antcall target="ComponentTestCase" />
+	</target>
+	<target name="reportAllBasic" depends="runAllBasic, junitreport" />
+
+	<target name="runAllCollection">
+		<antcall target="ChildrenTestCase" />
+		<antcall target="CollectionTestCase" />
+	</target>
+	<target name="reportAllCollection" depends="runAllCollection, junitreport" />
+
+	<target name="runAllFeature">
+		<antcall target="FeaturesTestCase0001" />
+		<antcall target="FeaturesTestCase0500" />
+		<antcall target="FeaturesTestCase1000" />
+	</target>
+	<target name="reportAllFeature" depends="runAllFeature, junitreport" />
+
+	<target name="runAllBug">
+		<antcall target="BugsTestCase0001" />
+		<antcall target="BugsTestCase0500" />
+		<antcall target="BugsTestCase1000" />
+	</target>
+	<target name="reportAllBug" depends="runAllBug, junitreport" />
+
+
+
+</project>
